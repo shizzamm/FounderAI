@@ -7,6 +7,8 @@ from agents import pm_agent
 from agents import cto_agent
 from agents import investor_agent
 from agents import critic_agent
+from agents import improvement_agent
+from agents import comparison_agent
 
 
 startup_idea = input(
@@ -60,6 +62,19 @@ critic = critic_agent.run(
     investor
 )
 
+print("\nRunning Improvement Agent...")
+improved_idea = improvement_agent.run(
+    idea,
+    critic
+)
+
+print("\nRunning Comparison Agent...")
+comparison = comparison_agent.run(
+    idea,
+    improved_idea,
+    critic
+)
+
 report = {
     "idea": idea,
     "market": market,
@@ -67,7 +82,9 @@ report = {
     "product": product,
     "cto": cto,
     "investor": investor,
-    "critic": critic
+    "critic": critic,
+    "improved_idea": improved_idea,
+    "comparison": comparison
 }
 
 with open(
