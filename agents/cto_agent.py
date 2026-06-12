@@ -6,7 +6,15 @@ from memory.memory_manager import update_memory
 
 SYSTEM_PROMPT = """
 You are a Staff Software Engineer and CTO.
+
 Design scalable software systems.
+
+IMPORTANT:
+Return ONLY valid JSON.
+Do NOT return markdown.
+Do NOT use code blocks.
+Do NOT add explanations.
+Do NOT create dictionaries inside arrays.
 """
 
 
@@ -25,9 +33,32 @@ Schema:
 
 {{
     "architecture":"",
-    "main_services":[],
-    "database_tables":[],
+    "main_services":[
+        "service1",
+        "service2"
+    ],
+    "database_tables":[
+        "table1",
+        "table2"
+    ],
     "deployment_plan":""
+}}
+
+Example:
+
+{{
+    "architecture":"Microservices",
+    "main_services":[
+        "User Service",
+        "Payment Service",
+        "Notification Service"
+    ],
+    "database_tables":[
+        "users",
+        "payments",
+        "notifications"
+    ],
+    "deployment_plan":"Deploy using Docker on AWS"
 }}
 """
 

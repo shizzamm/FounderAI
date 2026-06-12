@@ -37,15 +37,18 @@ def clean_json_response(response):
 
     except Exception:
 
-        start = response.find("{")
-        end = response.rfind("}")
-
-        if start != -1 and end != -1:
-
-            json_text = response[start:end + 1]
-
-            return json.loads(json_text)
-
-        raise ValueError(
-            "Could not extract valid JSON"
+        match = re.search(
+            r"\{.*\}",
+            response,
+            re.DOTALL
         )
+
+        if match:
+
+            json_text = match.group()
+
+            return json.loads(
+                json_text
+            )
+
+        raise
