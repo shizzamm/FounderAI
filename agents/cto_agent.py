@@ -12,7 +12,6 @@ Design scalable software systems.
 IMPORTANT:
 Return ONLY valid JSON.
 Do NOT return markdown.
-Do NOT use code blocks.
 Do NOT add explanations.
 Do NOT create dictionaries inside arrays.
 """
@@ -32,33 +31,33 @@ Product Data:
 Schema:
 
 {{
-    "architecture":"",
-    "main_services":[
-        "service1",
-        "service2"
+    \"architecture\":\"\",
+    \"main_services\":[
+        \"service1\",
+        \"service2\"
     ],
-    "database_tables":[
-        "table1",
-        "table2"
+    \"database_tables\":[
+        \"table1\",
+        \"table2\"
     ],
-    "deployment_plan":""
+    \"deployment_plan\":\"\"
 }}
 
 Example:
 
 {{
-    "architecture":"Microservices",
-    "main_services":[
-        "User Service",
-        "Payment Service",
-        "Notification Service"
+    \"architecture\":\"Microservices\",
+    \"main_services\":[
+        \"User Service\",
+        \"Payment Service\",
+        \"Notification Service\"
     ],
-    "database_tables":[
-        "users",
-        "payments",
-        "notifications"
+    \"database_tables\":[
+        \"users\",
+        \"payments\",
+        \"notifications\"
     ],
-    "deployment_plan":"Deploy using Docker on AWS"
+    \"deployment_plan\":\"Deploy using Docker on AWS\"
 }}
 """
 
@@ -70,9 +69,7 @@ Example:
     print("\nCTO RESPONSE:")
     print(response)
 
-    result = clean_json_response(
-        response
-    )
+    result = clean_json_response(response)
 
     update_memory(
         "cto",

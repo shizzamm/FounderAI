@@ -11,6 +11,7 @@ def clean_json_response(response):
 
     response = response.strip()
 
+    # Remove markdown code blocks
     response = re.sub(
         r"^```json",
         "",
@@ -32,23 +33,34 @@ def clean_json_response(response):
 
     response = response.strip()
 
+    # Detect multiple JSON objects
+    if "}\n{" in response or "}\r\n{" in response:
+
+        objects = re.findall(
+            r"\{.*?\}(?=\s*\{|$)",
+            response,
+            re.DOTALL
+        )
+
+        if objects:
+            response = objects[-1]
+
     try:
         return json.loads(response)
 
     except Exception:
 
-        match = re.search(
+        # Extract largest JSON object
+        matches = re.findall(
             r"\{.*\}",
             response,
             re.DOTALL
         )
 
-        if match:
+        if matches:
 
-            json_text = match.group()
+            largest = max(matches, key=len)
 
-            return json.loads(
-                json_text
-            )
+            return json.loads(largest)
 
         raise

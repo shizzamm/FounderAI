@@ -4,15 +4,30 @@ from services.hf_client import ask_llm
 from services.json_utils import clean_json_response
 from memory.memory_manager import update_memory
 
+
 SYSTEM_PROMPT = """
 You are a McKinsey business consultant.
+
+Always return exactly ONE valid JSON object.
+
+Never return markdown.
+
+Never explain.
+
+Never repeat the input.
+
+Never output multiple JSON objects.
 """
 
 
 def run(idea_data, market_data):
 
     prompt = f"""
-Return ONLY valid JSON.
+Use the following data ONLY as context.
+
+DO NOT repeat it.
+
+Return ONLY ONE valid JSON object matching the schema.
 
 Idea:
 
@@ -25,10 +40,10 @@ Market:
 Schema:
 
 {{
-    "revenue_model":"",
-    "pricing_strategy":"",
-    "customer_acquisition":"",
-    "growth_strategy":""
+    \"revenue_model\":\"\",
+    \"pricing_strategy\":\"\",
+    \"customer_acquisition\":\"\",
+    \"growth_strategy\":\"\"
 }}
 """
 
